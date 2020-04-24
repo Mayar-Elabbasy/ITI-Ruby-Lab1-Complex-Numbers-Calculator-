@@ -24,23 +24,34 @@ class ComplexNumber
         return "#{@real} + #{@imaginary}i"
     end
 
-    # def bulk_add(array)
-    #     array.each{ |other|
-    #     @real= @real.to_f.round(10) + other.real,
-    #     @imaginary = @imaginary.to_f.round(10) + other.imaginary
-    #     }
-    # arraySum = ComplexNumber.new(@real, @imaginary)
-    # return arraySum
-    # end
-  
+    def self.bulk_add(array)
+        arraySum = ComplexNumber.new(0,0)
+        array.each{ |other|
+        arraySum = arraySum + other
+        }
+        arraySum
+    end
+
+    def self.bulk_multiply​(array)
+        arrayMultiply = array.first
+        array.drop(1).each {|other| 
+        arrayMultiply = arrayMultiply * other 
+        }
+        arrayMultiply 
+    end
+
   end
   
 
 complex1 = ComplexNumber.new(3,2)
 complex2 = ComplexNumber.new(1,7)
 complex3 = ComplexNumber.new(4,5)
-# complex1.bulk_add([complex2,complex3])
+arraySum = ComplexNumber.bulk_add([complex1,complex2,complex3])
+arrayMultiply = ComplexNumber.bulk_multiply​([complex1,complex2,complex3])
+
 complexSum = complex1 + complex2
 complexMultiply = complex1 * complex2
 puts complexSum
 puts complexMultiply
+puts arraySum
+puts arrayMultiply
