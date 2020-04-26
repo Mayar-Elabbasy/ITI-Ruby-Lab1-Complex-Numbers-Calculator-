@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
     
     http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
+    load_and_authorize_resource
+    before_action :authenticate_user!  ,:only =>[:new , :create,:edit, :update,:destroy  ]
  
     def new
         @article = Article.new
@@ -20,6 +22,7 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
+        @article.user_id=current_user.id
        
         if @article.save
           redirect_to @article
