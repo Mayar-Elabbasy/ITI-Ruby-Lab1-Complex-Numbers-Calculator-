@@ -35,3 +35,11 @@ module Lab4Api
     config.api_only = true
   end
 end
+
+module ApiApp
+  class Application < Rails::Application
+    #.....
+    config.autoload_paths << Rails.root.join('lib')
+    #.....
+    end
+  end
